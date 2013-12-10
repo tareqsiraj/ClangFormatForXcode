@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Tareq A. Siraj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "Process.h"
 
 @interface ClangFormatPlugin : NSObject
-
+@property(strong) Process *clangFormat;
 @end

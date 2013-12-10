@@ -7,13 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C63CA2E18576E4C007FB25F /* Replacement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C63CA2D18576E4C007FB25F /* Replacement.m */; };
+		0C63CA3118576F58007FB25F /* ReplacementsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C63CA3018576F58007FB25F /* ReplacementsParser.m */; };
 		0C643F2D1856C4D700FE788C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C643F2C1856C4D700FE788C /* Cocoa.framework */; };
 		0C643F371856C4D700FE788C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C643F351856C4D700FE788C /* InfoPlist.strings */; };
 		0C643F401856C54300FE788C /* ClangFormatPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C643F3F1856C54300FE788C /* ClangFormatPlugin.m */; };
 		0C871F1E1856CD1E00B6347F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C871F1D1856CD1E00B6347F /* README.md */; };
+		0C871F211856D75000B6347F /* Process.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C871F201856D75000B6347F /* Process.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C63CA2C18576E4C007FB25F /* Replacement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Replacement.h; sourceTree = "<group>"; };
+		0C63CA2D18576E4C007FB25F /* Replacement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Replacement.m; sourceTree = "<group>"; };
+		0C63CA2F18576F58007FB25F /* ReplacementsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplacementsParser.h; sourceTree = "<group>"; };
+		0C63CA3018576F58007FB25F /* ReplacementsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplacementsParser.m; sourceTree = "<group>"; };
 		0C643F291856C4D700FE788C /* ClangFormatForXcode.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClangFormatForXcode.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C643F2C1856C4D700FE788C /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0C643F2F1856C4D700FE788C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -25,6 +32,8 @@
 		0C643F3E1856C54300FE788C /* ClangFormatPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClangFormatPlugin.h; sourceTree = "<group>"; };
 		0C643F3F1856C54300FE788C /* ClangFormatPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClangFormatPlugin.m; sourceTree = "<group>"; };
 		0C871F1D1856CD1E00B6347F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
+		0C871F1F1856D75000B6347F /* Process.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Process.h; sourceTree = "<group>"; };
+		0C871F201856D75000B6347F /* Process.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Process.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +109,12 @@
 			children = (
 				0C643F3E1856C54300FE788C /* ClangFormatPlugin.h */,
 				0C643F3F1856C54300FE788C /* ClangFormatPlugin.m */,
+				0C63CA2C18576E4C007FB25F /* Replacement.h */,
+				0C63CA2D18576E4C007FB25F /* Replacement.m */,
+				0C63CA2F18576F58007FB25F /* ReplacementsParser.h */,
+				0C63CA3018576F58007FB25F /* ReplacementsParser.m */,
+				0C871F1F1856D75000B6347F /* Process.h */,
+				0C871F201856D75000B6347F /* Process.m */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -168,6 +183,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C643F401856C54300FE788C /* ClangFormatPlugin.m in Sources */,
+				0C871F211856D75000B6347F /* Process.m in Sources */,
+				0C63CA2E18576E4C007FB25F /* Replacement.m in Sources */,
+				0C63CA3118576F58007FB25F /* ReplacementsParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
