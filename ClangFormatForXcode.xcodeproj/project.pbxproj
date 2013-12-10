@@ -10,6 +10,7 @@
 		0C643F2D1856C4D700FE788C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C643F2C1856C4D700FE788C /* Cocoa.framework */; };
 		0C643F371856C4D700FE788C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C643F351856C4D700FE788C /* InfoPlist.strings */; };
 		0C643F401856C54300FE788C /* ClangFormatPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C643F3F1856C54300FE788C /* ClangFormatPlugin.m */; };
+		0C871F1E1856CD1E00B6347F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C871F1D1856CD1E00B6347F /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		0C643F381856C4D700FE788C /* ClangFormatForXcode-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ClangFormatForXcode-Prefix.pch"; sourceTree = "<group>"; };
 		0C643F3E1856C54300FE788C /* ClangFormatPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClangFormatPlugin.h; sourceTree = "<group>"; };
 		0C643F3F1856C54300FE788C /* ClangFormatPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClangFormatPlugin.m; sourceTree = "<group>"; };
+		0C871F1D1856CD1E00B6347F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		0C643F331856C4D700FE788C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0C871F1D1856CD1E00B6347F /* README.md */,
 				0C643F341856C4D700FE788C /* ClangFormatForXcode-Info.plist */,
 				0C643F351856C4D700FE788C /* InfoPlist.strings */,
 				0C643F381856C4D700FE788C /* ClangFormatForXcode-Prefix.pch */,
@@ -152,6 +155,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C871F1E1856CD1E00B6347F /* README.md in Resources */,
 				0C643F371856C4D700FE788C /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
