@@ -14,7 +14,7 @@
 @synthesize clangFormat = _clangFormat;
 
 static ClangFormatPlugin *plugin = nil;
-//FIXME: Make the path selectable by the user
+// FIXME: Make the path selectable by the user
 static NSString *clangFormatExecutablePath = @"/opt/clang/bin/clang-format";
 
 #pragma mark onload, constructor, destructor
@@ -49,30 +49,25 @@ static NSString *clangFormatExecutablePath = @"/opt/clang/bin/clang-format";
   return self;
 }
 
--(void) dealloc {
-  [_clangFormat release];
-  [super dealloc];
-}
-
 #pragma mark Menu related methods
 - (void)addClangFormatMenuToEditMenu {
   NSMenu *mainMenu = [NSApp mainMenu];
   NSMenuItem *editMenuItem = [mainMenu itemWithTitle:@"Edit"];
   if (editMenuItem) {
     NSMenuItem *clangFormatMenuItem =
-        [[[NSMenuItem alloc] initWithTitle:@"Clang Format"
-                                    action:@selector(menuActionNoOp:)
-                             keyEquivalent:@""] autorelease];
+        [[NSMenuItem alloc] initWithTitle:@"Clang Format"
+                                   action:@selector(menuActionNoOp:)
+                            keyEquivalent:@""];
     [clangFormatMenuItem setTarget:self];
     [[editMenuItem submenu] addItem:clangFormatMenuItem];
 
-    NSMenu *clangFormatSubMenu = [[[NSMenu alloc] init] autorelease];
+    NSMenu *clangFormatSubMenu = [[NSMenu alloc] init];
     [clangFormatMenuItem setSubmenu:clangFormatSubMenu];
 
     NSMenuItem *cfFormatSelected =
-        [[[NSMenuItem alloc] initWithTitle:@"Format Selected Text"
-                                    action:@selector(menuActionFormatSelected:)
-                             keyEquivalent:@"X"] autorelease];
+        [[NSMenuItem alloc] initWithTitle:@"Format Selected Text"
+                                   action:@selector(menuActionFormatSelected:)
+                            keyEquivalent:@"X"];
 
     [cfFormatSelected setTarget:self];
     [clangFormatSubMenu addItem:cfFormatSelected];
@@ -116,8 +111,7 @@ static NSString *clangFormatExecutablePath = @"/opt/clang/bin/clang-format";
     return;
   }
 
-  ReplacementsParser *replacements =
-      [[[ReplacementsParser alloc] init] autorelease];
+  ReplacementsParser *replacements = [[ReplacementsParser alloc] init];
   error = nil;
   if (![replacements applyReplacements:[[self clangFormat] stdOut]
                             inTextView:sourceView

@@ -79,7 +79,7 @@
 }
 
 - (BOOL)execute:(NSError **)error {
-  NSTask *task = [[[NSTask alloc] init] autorelease];
+  NSTask *task = [[NSTask alloc] init];
   [task setLaunchPath:[self executable]];
   NSPipe *stdOutPipe = [NSPipe pipe];
   NSPipe *stdErrPipe = [NSPipe pipe];
@@ -98,10 +98,10 @@
     [task launch];
   }
   @catch (NSException *exception) {
-    //NSString *exceptionStr =
+    // NSString *exceptionStr =
     //    [NSString stringWithFormat:@"Name: %@\nReason: %@\nUserInfo: %@",
     //        [exception name], [exception reason], [exception userInfo]];
-    //FIXME: populate error
+    // FIXME: populate error
     return NO;
   }
 
@@ -120,7 +120,6 @@
   if (status == 0) {
     NSFileHandle *stdOutFileHandle = [stdOutPipe fileHandleForReading];
     NSData *stdOutData = [stdOutFileHandle readDataToEndOfFile];
-    [[self stdOut] release];
     // FIXME: data might have unicode data
     [self setStdOut:[[NSString alloc] initWithData:stdOutData
                                           encoding:NSASCIIStringEncoding]];
@@ -140,11 +139,6 @@
 
 - (void)clearParams {
   [[self params] removeAllObjects];
-}
-
-- (void)dealloc {
-  [_params release];
-  [super dealloc];
 }
 
 @end

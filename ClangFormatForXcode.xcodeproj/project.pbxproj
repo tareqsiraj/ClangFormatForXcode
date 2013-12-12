@@ -274,12 +274,10 @@
 		0C643F3C1856C4D700FE788C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = $HOME;
-				GCC_ENABLE_OBJC_GC = supported;
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ClangFormatForXcode/ClangFormatForXcode-Prefix.pch";
 				INFOPLIST_FILE = "ClangFormatForXcode/ClangFormatForXcode-Info.plist";
@@ -292,12 +290,10 @@
 		0C643F3D1856C4D700FE788C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = $HOME;
-				GCC_ENABLE_OBJC_GC = supported;
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ClangFormatForXcode/ClangFormatForXcode-Prefix.pch";
 				INFOPLIST_FILE = "ClangFormatForXcode/ClangFormatForXcode-Info.plist";

@@ -27,11 +27,6 @@
   return self;
 }
 
-- (void)dealloc {
-  [_replacementStr release];
-  [super dealloc];
-}
-
 - (void)appendReplacement:(NSString *)str {
   [[self replacementStr] appendString:str];
 }

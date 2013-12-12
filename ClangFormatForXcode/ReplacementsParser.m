@@ -20,27 +20,21 @@
   return self;
 }
 
-- (void)dealloc {
-  [_replacements release];
-  [super dealloc];
-}
-
 - (BOOL)applyReplacements:(NSString *)replacementsXML
                inTextView:(NSTextView *)txtView
                     error:(NSError **)error {
-  NSXMLParser *parser = [[[NSXMLParser alloc]
-      initWithData:[replacementsXML
-          dataUsingEncoding:NSUTF8StringEncoding]] autorelease];
+  NSXMLParser *parser = [[NSXMLParser alloc]
+      initWithData:[replacementsXML dataUsingEncoding:NSUTF8StringEncoding]];
   [parser setShouldProcessNamespaces:NO];
   [parser setShouldReportNamespacePrefixes:NO];
   [parser setShouldResolveExternalEntities:NO];
   [parser setDelegate:self];
   [parser parse];
 
-  NSMutableArray *replacementRanges = [[[NSMutableArray alloc]
-      initWithCapacity:[[self replacements] count]] autorelease];
-  NSMutableArray *replacementStrings = [[[NSMutableArray alloc]
-      initWithCapacity:[[self replacements] count]] autorelease];
+  NSMutableArray *replacementRanges =
+      [[NSMutableArray alloc] initWithCapacity:[[self replacements] count]];
+  NSMutableArray *replacementStrings =
+      [[NSMutableArray alloc] initWithCapacity:[[self replacements] count]];
 
   // FIXME: Can we avoid creating Replacement objects and directly populate the
   // following arrays?
@@ -67,7 +61,7 @@
       [[txtView textStorage] endEditing];
     }
   }
-  
+
   return YES;
 }
 
@@ -81,9 +75,9 @@
     NSString *offset = [attributeDict objectForKey:@"offset"];
     NSString *length = [attributeDict objectForKey:@"length"];
     Replacement *replacement =
-        [[[Replacement alloc] initWithOffset:[offset integerValue]
-                                      length:[length integerValue]
-                              replacementStr:@""] autorelease];
+        [[Replacement alloc] initWithOffset:[offset integerValue]
+                                     length:[length integerValue]
+                             replacementStr:@""];
     [[self replacements] addObject:replacement];
   }
 }
@@ -92,7 +86,7 @@
     didEndElement:(NSString *)elementName
      namespaceURI:(NSString *)namespaceURI
     qualifiedName:(NSString *)qName {
-  //FIXME: Don't need this method
+  // FIXME: Don't need this method
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
