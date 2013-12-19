@@ -13,4 +13,6 @@ Xcode 5 plugin for clang-format.
 
 **Usage**: After successfully installing the plugin, you should see a new `Clang Format` menu under the `Edit` menu in Xcode. Simply select the line(s) in your source window and click on `Clang Format`->`Format Selected Text`. Alternatively you can use the keyboard shortcut <kbd>⌘</kbd>+<kbd>⇧</kbd>+<kbd>X</kbd> to have the same effect.
 
+Users can select between built-in styles from `Clang Format`->`Format Style` menu. Note that the selection is global for all projects.
+
 **Status**: alpha quality.
