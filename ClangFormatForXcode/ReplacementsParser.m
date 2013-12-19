@@ -22,7 +22,7 @@
 
 - (BOOL)applyReplacements:(NSString *)replacementsXML
                inTextView:(NSTextView *)txtView
-                    error:(NSError **)error {
+                    error:(NSError *__autoreleasing *)error {
   NSXMLParser *parser = [[NSXMLParser alloc]
       initWithData:[replacementsXML dataUsingEncoding:NSUTF8StringEncoding]];
   [parser setShouldProcessNamespaces:NO];

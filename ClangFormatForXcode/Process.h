@@ -15,8 +15,9 @@
 @property(strong) NSString *stdIn;
 @property(strong) NSMutableArray *params;
 
-- (id)initWithExecutable:(NSString *)exe error:(NSError **)error;
+- (id)initWithExecutable:(NSString *)exe
+                   error:(NSError *__autoreleasing *)error;
 - (void)addParams:(NSString *)paramStr;
 - (void)clearParams;
-- (BOOL)execute:(NSError **)error;
+- (BOOL)execute:(NSError *__autoreleasing *)error;
 @end

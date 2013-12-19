@@ -21,7 +21,8 @@
 @synthesize stdIn = _stdIn;
 @synthesize params = _params;
 
-- (id)initWithExecutable:(NSString *)exe error:(NSError **)error {
+- (id)initWithExecutable:(NSString *)exe
+                   error:(NSError *__autoreleasing *)error {
   NSFileManager *fileManager = [NSFileManager defaultManager];
   NSString *absolutePath = nil;
   if (![fileManager fileExistsAtPath:exe]) {
@@ -78,7 +79,7 @@
   return self;
 }
 
-- (BOOL)execute:(NSError **)error {
+- (BOOL)execute:(NSError *__autoreleasing *)error {
   NSTask *task = [[NSTask alloc] init];
   [task setLaunchPath:[self executable]];
   NSPipe *stdOutPipe = [NSPipe pipe];

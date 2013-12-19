@@ -8,14 +8,21 @@
 
 #import "ClangFormatPlugin.h"
 #import "ReplacementsParser.h"
+#import "PluginPreferences.h"
+#import "Preferences.h"
+#import "Utils.h"
+
+@interface ClangFormatPlugin ()
+@property(strong) NSMutableDictionary *formatStyles;
+@end
 
 @implementation ClangFormatPlugin
 
 @synthesize clangFormat = _clangFormat;
+@synthesize preferences = _preferences;
+@synthesize formatStyles = _formatStyles;
 
 static ClangFormatPlugin *plugin = nil;
-// FIXME: Make the path selectable by the user
-static NSString *clangFormatExecutablePath = @"/opt/clang/bin/clang-format";
 
 #pragma mark onload, constructor, destructor
 + (void)pluginDidLoad:(NSBundle *)bundle {
@@ -33,18 +40,42 @@ static NSString *clangFormatExecutablePath = @"/opt/clang/bin/clang-format";
 
 - (id)init {
   if (self = [super init]) {
+    _formatStyles = [NSMutableDictionary dictionary];
+    [[self formatStyles] insertValue:[NSNull null] inPropertyWithKey:@"LLVM"];
+    [[self formatStyles] insertValue:[NSNull null] inPropertyWithKey:@"Google"];
+    [[self formatStyles] insertValue:[NSNull null]
+                   inPropertyWithKey:@"Chromium"];
+    [[self formatStyles] insertValue:[NSNull null]
+                   inPropertyWithKey:@"Mozilla"];
+    [[self formatStyles] insertValue:[NSNull null] inPropertyWithKey:@"Webkit"];
+
     NSError *error = nil;
-    _clangFormat = [[Process alloc] initWithExecutable:clangFormatExecutablePath
-                                                 error:&error];
-    if (error != nil) {
-      [[NSAlert alertWithMessageText:[error description]
-                       defaultButton:@"OK"
-                     alternateButton:nil
-                         otherButton:nil
-           informativeTextWithFormat:@""] runModal];
-      return self;
+    _preferences =
+        [[Preferences alloc] initWithAppName:@"ClangFormatForXcode"
+                                  configName:@"ClangFormatForXcode.plist"
+                                configObject:[[PluginPreferences alloc] init]
+                                       error:&error];
+    if ([self preferences] == nil) {
+      [Utils alertWithError:error];
+      return nil;
     }
+
+    [[self preferences] loadPreferences:&error];
+
+    _clangFormat =
+        [[Process alloc] initWithExecutable:[[self preferences] clangFormatPath]
+                                      error:&error];
+    if (error != nil) {
+      [Utils alertWithError:error];
+      return nil;
+    }
+
     [self addClangFormatMenuToEditMenu];
+
+    // Select the style saved in preferences
+    NSMenuItem *menu =
+        [[self formatStyles] objectForKey:[[self preferences] selectedStyle]];
+    [menu setState:NSOnState];
   }
   return self;
 }
@@ -71,10 +102,48 @@ static NSString *clangFormatExecutablePath = @"/opt/clang/bin/clang-format";
 
     [cfFormatSelected setTarget:self];
     [clangFormatSubMenu addItem:cfFormatSelected];
+
+    NSMenuItem *cfSelectedStyle =
+        [[NSMenuItem alloc] initWithTitle:@"Format Style"
+                                   action:@selector(menuActionNoOp:)
+                            keyEquivalent:@""];
+    [cfSelectedStyle setTarget:self];
+    [clangFormatSubMenu addItem:cfSelectedStyle];
+
+    NSMenu *cfStyleSubMenu = [[NSMenu alloc] init];
+    [cfSelectedStyle setSubmenu:cfStyleSubMenu];
+
+    [[self formatStyles] enumerateKeysAndObjectsUsingBlock:^(id key,
+                                                             id obj,
+                                                             BOOL *stop) {
+      NSMenuItem *item =
+          [[NSMenuItem alloc] initWithTitle:key
+                                     action:@selector(menuActionSelectStyle:)
+                              keyEquivalent:@""];
+      [item setTarget:self];
+      [cfStyleSubMenu addItem:item];
+      [[self formatStyles] setObject:item forKey:key];
+    }];
   }
 }
 
 - (void)menuActionNoOp:(id)sender {
+}
+
+- (void)menuActionSelectStyle:(id)sender {
+  NSMenuItem *oldStyle =
+      [[self formatStyles] objectForKey:[[self preferences] selectedStyle]];
+
+  // Save the new style in preferences
+  [[self preferences] setSelectedStyle:[sender title]];
+  NSError *error = nil;
+  if (![[self preferences] savePreferences:&error]) {
+    [Utils alertWithError:error];
+    return;
+  }
+
+  [oldStyle setState:NSOffState];
+  [sender setState:NSOnState];
 }
 
 - (void)menuActionFormatSelected:(id)sender {
@@ -93,8 +162,10 @@ static NSString *clangFormatExecutablePath = @"/opt/clang/bin/clang-format";
   NSRange selectedRange = [rangeValue rangeValue];
   NSString *params =
       [NSString
-          stringWithFormat:@"-offset %lu -length %lu -output-replacements-xml",
-          selectedRange.location, selectedRange.length];
+          stringWithFormat:
+              @"-offset %lu -length %lu -output-replacements-xml -style %@",
+          selectedRange.location, selectedRange.length,
+          [[self preferences] selectedStyle]];
   NSString *inputText = [sourceView string];
 
   [[self clangFormat] addParams:params];
@@ -103,11 +174,7 @@ static NSString *clangFormatExecutablePath = @"/opt/clang/bin/clang-format";
   [[self clangFormat] execute:&error];
 
   if (error != nil) {
-    [[NSAlert alertWithMessageText:[error localizedDescription]
-                     defaultButton:@"OK"
-                   alternateButton:nil
-                       otherButton:nil
-         informativeTextWithFormat:@""] runModal];
+    [Utils alertWithError:error];
     return;
   }
 
@@ -116,11 +183,7 @@ static NSString *clangFormatExecutablePath = @"/opt/clang/bin/clang-format";
   if (![replacements applyReplacements:[[self clangFormat] stdOut]
                             inTextView:sourceView
                                  error:&error]) {
-    [[NSAlert alertWithMessageText:[error localizedDescription]
-                     defaultButton:@"OK"
-                   alternateButton:nil
-                       otherButton:nil
-         informativeTextWithFormat:@""] runModal];
+    [Utils alertWithError:error];
     return;
   }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C222D6B185D5CC00080B287 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C222D6A185D5CC00080B287 /* Utils.m */; };
+		0C4A22A618598B9C008D1A86 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4A22A518598B9C008D1A86 /* Preferences.m */; };
 		0C63CA2E18576E4C007FB25F /* Replacement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C63CA2D18576E4C007FB25F /* Replacement.m */; };
 		0C63CA3118576F58007FB25F /* ReplacementsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C63CA3018576F58007FB25F /* ReplacementsParser.m */; };
 		0C643F2D1856C4D700FE788C /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C643F2C1856C4D700FE788C /* Cocoa.framework */; };
@@ -14,9 +16,14 @@
 		0C643F401856C54300FE788C /* ClangFormatPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C643F3F1856C54300FE788C /* ClangFormatPlugin.m */; };
 		0C871F1E1856CD1E00B6347F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C871F1D1856CD1E00B6347F /* README.md */; };
 		0C871F211856D75000B6347F /* Process.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C871F201856D75000B6347F /* Process.m */; };
+		0CA2A4AB185EA093007C2CEB /* PluginPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA2A4AA185EA093007C2CEB /* PluginPreferences.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C222D69185D5CC00080B287 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = ../Utils.h; sourceTree = "<group>"; };
+		0C222D6A185D5CC00080B287 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = ../Utils.m; sourceTree = "<group>"; };
+		0C4A22A418598B9C008D1A86 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
+		0C4A22A518598B9C008D1A86 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		0C63CA2C18576E4C007FB25F /* Replacement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Replacement.h; sourceTree = "<group>"; };
 		0C63CA2D18576E4C007FB25F /* Replacement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Replacement.m; sourceTree = "<group>"; };
 		0C63CA2F18576F58007FB25F /* ReplacementsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplacementsParser.h; sourceTree = "<group>"; };
@@ -34,6 +41,8 @@
 		0C871F1D1856CD1E00B6347F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		0C871F1F1856D75000B6347F /* Process.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Process.h; sourceTree = "<group>"; };
 		0C871F201856D75000B6347F /* Process.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Process.m; sourceTree = "<group>"; };
+		0CA2A4A9185EA093007C2CEB /* PluginPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginPreferences.h; sourceTree = "<group>"; };
+		0CA2A4AA185EA093007C2CEB /* PluginPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginPreferences.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,12 +118,18 @@
 			children = (
 				0C643F3E1856C54300FE788C /* ClangFormatPlugin.h */,
 				0C643F3F1856C54300FE788C /* ClangFormatPlugin.m */,
+				0C4A22A418598B9C008D1A86 /* Preferences.h */,
+				0C4A22A518598B9C008D1A86 /* Preferences.m */,
+				0CA2A4A9185EA093007C2CEB /* PluginPreferences.h */,
+				0CA2A4AA185EA093007C2CEB /* PluginPreferences.m */,
 				0C63CA2C18576E4C007FB25F /* Replacement.h */,
 				0C63CA2D18576E4C007FB25F /* Replacement.m */,
 				0C63CA2F18576F58007FB25F /* ReplacementsParser.h */,
 				0C63CA3018576F58007FB25F /* ReplacementsParser.m */,
 				0C871F1F1856D75000B6347F /* Process.h */,
 				0C871F201856D75000B6347F /* Process.m */,
+				0C222D69185D5CC00080B287 /* Utils.h */,
+				0C222D6A185D5CC00080B287 /* Utils.m */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -184,8 +199,11 @@
 			files = (
 				0C643F401856C54300FE788C /* ClangFormatPlugin.m in Sources */,
 				0C871F211856D75000B6347F /* Process.m in Sources */,
+				0CA2A4AB185EA093007C2CEB /* PluginPreferences.m in Sources */,
 				0C63CA2E18576E4C007FB25F /* Replacement.m in Sources */,
+				0C222D6B185D5CC00080B287 /* Utils.m in Sources */,
 				0C63CA3118576F58007FB25F /* ReplacementsParser.m in Sources */,
+				0C4A22A618598B9C008D1A86 /* Preferences.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

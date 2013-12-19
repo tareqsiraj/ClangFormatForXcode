@@ -13,5 +13,5 @@
 
 - (BOOL)applyReplacements:(NSString *)replacementsXML
                inTextView:(NSTextView *)txtView
-                    error:(NSError **)error;
+                    error:(NSError *__autoreleasing *)error;
 @end

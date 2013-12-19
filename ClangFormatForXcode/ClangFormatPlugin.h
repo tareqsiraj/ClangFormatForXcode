@@ -10,4 +10,5 @@
 
 @interface ClangFormatPlugin : NSObject
 @property(strong) Process *clangFormat;
+@property(strong) id preferences;
 @end
