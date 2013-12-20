@@ -7,7 +7,7 @@ Xcode 5 plugin for clang-format.
 
 **Installation**:
 
-* Change the path to clang-format in `ClangFormatPlugin.m` (in the top portion of the file).
+* Change the path to clang-format in `PluginPreferences.m`. Right now it defaults to `~/bin/clang-format`.
 * Build the project. This will automatically install the plugin in `~/Library/Application Support/Developer/Shared/Xcode/Plug-ins`.
 * Restart Xcode.
 
