@@ -1,7 +1,7 @@
 ClangFormatForXcode
 ===================
 
-Xcode 5 plugin for clang-format.
+Xcode 5 plugin for [clang-format](http://clang.llvm.org/docs/ClangFormat.html).
 
 **Disclaimer**: This is a work in progress, use at your own risk.
 
