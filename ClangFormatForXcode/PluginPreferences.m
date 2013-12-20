@@ -15,7 +15,9 @@
 - (id)init {
   if (self = [super init]) {
     // Set the default values
-    _clangFormatPath = @"/opt/clang/bin/clang-format";
+    _clangFormatPath =
+        [[@"~/bin/clang-format" stringByExpandingTildeInPath]
+         stringByResolvingSymlinksInPath];
     _selectedStyle = @"LLVM";
   }
   return self;
