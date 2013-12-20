@@ -7,6 +7,7 @@
 //
 
 #import "Process.h"
+#import "Utils.h"
 
 @interface Process ()
 @property(readwrite) NSString *stdOut;
@@ -49,7 +50,7 @@
 
     // We either didn't find the file or its not executable.
     if (absolutePath == nil) {
-      if (error != nil) {
+      if (error) {
         NSString *errorStr;
         if (fileNotExecutable)
           errorStr =
@@ -57,11 +58,7 @@
         else
           errorStr = [NSString stringWithFormat:@"%@ not found in path!", exe];
 
-        NSMutableDictionary *errorDetails = [NSMutableDictionary dictionary];
-        [errorDetails setValue:errorStr forKey:NSLocalizedDescriptionKey];
-        *error = [NSError errorWithDomain:@"FileNotFound"
-                                     code:1
-                                 userInfo:errorDetails];
+        *error = [Utils createError:errorStr];
       }
       return nil;
     }
@@ -76,6 +73,7 @@
     _stdIn = nil;
     _params = [[NSMutableArray alloc] initWithCapacity:5];
   }
+  
   return self;
 }
 
@@ -99,19 +97,16 @@
     [task launch];
   }
   @catch (NSException *exception) {
-    // NSString *exceptionStr =
-    //    [NSString stringWithFormat:@"Name: %@\nReason: %@\nUserInfo: %@",
-    //        [exception name], [exception reason], [exception userInfo]];
-    // FIXME: populate error
+    if (error)
+      *error = [Utils createError:[exception reason]];
     return NO;
   }
 
   if (stdInPipe != nil) {
     NSFileHandle *stdInFileHandle = [stdInPipe fileHandleForWriting];
 
-    // FIXME: File might have unicode characters.
     [stdInFileHandle
-        writeData:[[self stdIn] dataUsingEncoding:NSASCIIStringEncoding]];
+        writeData:[[self stdIn] dataUsingEncoding:NSUTF8StringEncoding]];
     [stdInFileHandle closeFile];
   }
 
@@ -121,12 +116,16 @@
   if (status == 0) {
     NSFileHandle *stdOutFileHandle = [stdOutPipe fileHandleForReading];
     NSData *stdOutData = [stdOutFileHandle readDataToEndOfFile];
-    // FIXME: data might have unicode data
     [self setStdOut:[[NSString alloc] initWithData:stdOutData
-                                          encoding:NSASCIIStringEncoding]];
+                                          encoding:NSUTF8StringEncoding]];
     return YES;
   } else {
-    // TODO: Fill up the NSError
+    if (error) {
+      NSString *errStr =
+          [NSString stringWithFormat:@"'%@' exitted with code %d",
+                                     [self executable], status];
+      *error = [Utils createError:errStr];
+    }
     return NO;
   }
 }

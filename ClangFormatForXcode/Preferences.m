@@ -47,13 +47,15 @@
       // For some reason, there is a file with the same name exists in the
       // Application Preferences directory. Just raise an error in this weird
       // situation.
-      NSString *errMsg =
-          [NSString stringWithFormat:
-                        @"'%@' seems to be a file instead of a directory. "
-                         "Please remove this file and restart Xcode to "
-                         "allow ClangFormatForXcode to save preferences.",
-              appPrefDir];
-      *error = [Utils createError:errMsg];
+      if (error) {
+        NSString *errMsg =
+            [NSString stringWithFormat:
+                          @"'%@' seems to be a file instead of a directory. "
+                           "Please remove this file and restart Xcode to "
+                           "allow ClangFormatForXcode to save preferences.",
+                appPrefDir];
+        *error = [Utils createError:errMsg];
+      }
       return nil;
     }
 
@@ -89,7 +91,8 @@
   NSDictionary *preferences =
       [[NSDictionary alloc] initWithContentsOfURL:[self appPref]];
   if (preferences == nil) {
-    *error = [Utils createError:@"Error loading preferences!"];
+    if (error)
+      *error = [Utils createError:@"Error loading preferences!"];
     return NO;
   }
   [[self configObject] setValuesForKeysWithDictionary:preferences];
@@ -111,7 +114,8 @@
   NSDictionary *preferences =
       [[self configObject] dictionaryWithValuesForKeys:propArray];
   if (![preferences writeToURL:[self appPref] atomically:YES]) {
-    *error = [Utils createError:@"Failed to write preferences!"];
+    if (error)
+      *error = [Utils createError:@"Failed to write preferences!"];
     return NO;
   }
   return YES;

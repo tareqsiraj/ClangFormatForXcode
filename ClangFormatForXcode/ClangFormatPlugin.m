@@ -65,7 +65,7 @@ static ClangFormatPlugin *plugin = nil;
     _clangFormat =
         [[Process alloc] initWithExecutable:[[self preferences] clangFormatPath]
                                       error:&error];
-    if (error != nil) {
+    if (!_clangFormat) {
       [Utils alertWithError:error];
       return nil;
     }
@@ -151,8 +151,7 @@ static ClangFormatPlugin *plugin = nil;
 
   NSTextView *sourceView = (NSTextView *)firstResponder;
   if (!sourceView) {
-    // NSLog(@"menuActionFormatSelected: invalid source view!");
-    // TODO: Show error
+    [Utils alert:@"Invalid source view!"];
     return;
   }
 
@@ -160,10 +159,9 @@ static ClangFormatPlugin *plugin = nil;
 
   NSValue *rangeValue = (NSValue *)[currentSelectedRanges objectAtIndex:0];
   NSRange selectedRange = [rangeValue rangeValue];
-  NSString *params =
-      [NSString
-          stringWithFormat:
-              @"-offset %lu -length %lu -output-replacements-xml -style %@",
+  NSString *params = [NSString
+      stringWithFormat:
+          @"-offset %lu -length %lu -output-replacements-xml -style %@",
           selectedRange.location, selectedRange.length,
           [[self preferences] selectedStyle]];
   NSString *inputText = [sourceView string];
